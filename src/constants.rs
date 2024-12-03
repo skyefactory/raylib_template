@@ -1,0 +1,2 @@
+pub const INITIAL_WINDOW_WIDTH: i32 = 800;
+pub const INITIAL_WINDOW_HEIGHT: i32 = 450;

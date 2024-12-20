@@ -26,7 +26,9 @@ fn main() {
         Camera3D::perspective(rvec3(0, 2, 4), rvec3(0, 0, 0), rvec3(0, 1, 0), 45.0),
     );
 
-    let mut shader = load_light_shader(&mut application);
+    let mut shader = load_light_shader(
+        &mut appl,
+        Vector4{x:0.2, y:0.2, z:0.2, w:1.0});
 
     let cube_mesh = gen_prim_mesh(
         PrimMeshes::Cube {

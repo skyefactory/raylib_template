@@ -1,6 +1,6 @@
 use raylib::{
     ffi::ShaderLocationIndex,
-    math::rvec2,
+    math::{rvec2, Vector4},
     models::{Mesh, Model, RaylibMesh},
     shaders::{RaylibShader, Shader},
     RaylibHandle, RaylibThread,
@@ -8,9 +8,9 @@ use raylib::{
 
 use crate::structs::{Application, PrimMeshes, VirtualScreen};
 
-pub fn load_light_shader(application: &mut Application) -> Shader {
-    let mut shader = application.rl.raylib_handle.load_shader(
-        &application.rl.raylib_thread,
+pub fn load_light_shader(raylib_handle: &mut RaylibHandle, raylib_thread: &RaylibThread, ambience: Vector4) -> Shader {
+    let mut shader = raylib_handle.load_shader(
+        raylib_thread,
         Some("./shader/simpleLight.vs"),
         Some("./shader/simpleLight.fs"),
     );
@@ -22,7 +22,7 @@ pub fn load_light_shader(application: &mut Application) -> Shader {
         shader.get_shader_location("viewPos");
 
     let amb = shader.get_shader_location("ambient");
-    shader.set_shader_value(amb, [0.2, 0.2, 0.2, 1.0]);
+    shader.set_shader_value(amb, [ambience.x, ambience.y, ambience.z, ambience.w]);
     shader
 }
 
